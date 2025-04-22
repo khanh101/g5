@@ -4,3 +4,7 @@
 - A: [g5](https://github.com/khanh101/g5) come to the rescue
 
 this is my effort to port my [sudoku game](https://github.com/khanh101/sudoku) to the web 
+
+## MINIMAL EXAMPLE
+
+`cd app; ./run`

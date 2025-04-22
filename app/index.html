@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>g5 WASM Demo</title>
+    <script src="wasm_exec.js"></script>
+</head>
+<body>
+<h1>g5 WASM Demo</h1>
+
+<h2>POST /hello</h2>
+<form id="postForm">
+    <label>
+        Name:
+        <input type="text" id="nameInput" required />
+    </label>
+    <button type="submit">Send POST</button>
+</form>
+
+<h2>GET /ping</h2>
+<button onclick="sendGet()">Send GET</button>
+
+<h2>Response</h2>
+<pre id="response"></pre>
+
+<script>
+    const go = new Go(); // from wasm_exec.js
+
+    WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
+        go.run(result.instance);
+    });
+
+    document.getElementById("postForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = document.getElementById("nameInput").value;
+        const input = {
+            path: "POST/hello",
+            data: JSON.stringify({ name })
+        };
+        const result = g5(JSON.stringify(input));
+        document.getElementById("response").textContent = result;
+    });
+
+    function sendGet() {
+        const input = {
+            path: "GET/ping",
+            data: ""
+        };
+        const result = g5(JSON.stringify(input));
+        document.getElementById("response").textContent = result;
+    }
+</script>
+
+
+</body>
+</html>
