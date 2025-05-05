@@ -7,4 +7,6 @@ this is my effort to port my [sudoku game](https://github.com/khanh101/sudoku) t
 
 ## MINIMAL EXAMPLE
 
-`cd app; ./run`
+- deployed on github pages: [https://khanh101.github.io/g5/app/](https://khanh101.github.io/g5/app/)
+
+- run locally `cd app; ./run`
